@@ -37,7 +37,7 @@
             success: function () {},
             error: function () {},
             rememberMe: true,
-            redirect: '/download',
+            redirect: 'download',
             fetchUser: true,
         });       
       },

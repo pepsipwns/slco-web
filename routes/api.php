@@ -13,19 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('auth/login', 'AuthController@login');
+
 Route::post('auth/register', 'AuthController@register');
-Route::group(['middleware' => 'jwt.auth'], function(){
-    Route::post('auth/login', 'AuthController@login');
- });
 
-Route::group(['middleware' => 'jwt.auth'], function(){
-  Route::get('auth/user', 'AuthController@user');
+Route::middleware('jwt.auth')->get('users', function () {
+    return auth('api')->user();
 });
-
-Route::group(['middleware' => 'jwt.refresh'], function(){
-  Route::get('auth/refresh', 'AuthController@refresh');
-});
-
-Route::group(['middleware' => 'jwt.auth'], function(){
-    Route::post('auth/logout', 'AuthController@logout');
- });

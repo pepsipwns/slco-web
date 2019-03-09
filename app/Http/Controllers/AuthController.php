@@ -23,29 +23,26 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        if ( ! $token = JWTAuth::attempt($credentials)) {
-                return response([
-                    'status' => 'error',
-                    'error' => 'invalid.credentials',
-                    'msg' => 'Invalid Credentials.'
-                ], 400);
+    public function login() {
+        $credentials = request(['email', 'password']);
+        if (!$token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return response([
-                'status' => 'success'
-            ])
-            ->header('Authorization', $token);
+        return response()->json([
+            'token' => $token,
+            'expires' => auth('api')->factory()->getTTL() * 60,
+        ])->header('Authorization', $token);
     }
 
     public function logout()
     {
-        JWTAuth::invalidate();
-        return response([
-                'status' => 'success',
-                'msg' => 'Logged out Successfully.'
-            ], 200);
+        $this->guard()->logout();
+
+        $request->session()->flush();
+    
+        $request->session()->regenerate();
+    
+        return redirect('/');
     }
     
     public function user(Request $request)

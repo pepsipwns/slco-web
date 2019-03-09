@@ -3488,7 +3488,7 @@ __webpack_require__.r(__webpack_exports__);
         success: function success() {},
         error: function error() {},
         rememberMe: true,
-        redirect: '/download',
+        redirect: 'download',
         fetchUser: true
       });
     }
@@ -5970,62 +5970,36 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "td",
-            { attrs: { width: "30%" } },
-            [
-              _c(
-                "div",
-                { staticClass: "logindiv" },
-                [
-                  _vm.authenticated
-                    ? _c(
-                        "router-link",
-                        {
-                          attrs: { to: "/login", replace: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.logout()
-                            }
-                          }
-                        },
-                        [
-                          _c("font", { staticClass: "factiontxt" }, [
-                            _vm._v(_vm._s(_vm.mockAccount.username))
-                          ]),
-                          _vm._v(", Logout")
-                        ],
-                        1
-                      )
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: { name: "login" } } }, [
-                _vm._v("Login")
-              ]),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: { name: "register" } } }, [
-                _vm._v("Register")
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.$auth.logout()
+          _c("td", { attrs: { width: "30%" } }, [
+            _c(
+              "div",
+              { staticClass: "logindiv" },
+              [
+                _c("router-link", { attrs: { to: { name: "login" } } }, [
+                  _vm._v("Login")
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: { name: "register" } } }, [
+                  _vm._v("Register")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.$auth.logout()
+                      }
                     }
-                  }
-                },
-                [_vm._v("Logout")]
-              )
-            ],
-            1
-          )
+                  },
+                  [_vm._v("Logout")]
+                )
+              ],
+              1
+            )
+          ])
         ])
       ]
     )

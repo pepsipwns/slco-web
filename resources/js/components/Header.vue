@@ -7,10 +7,10 @@
                 </td>
                 <td width=30%>
                 <div class="logindiv">
-                <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace><font class="factiontxt">{{mockAccount.username}}</font>, Logout</router-link></div>
                 <router-link :to="{ name: 'login' }">Login</router-link>
                 <router-link :to="{ name: 'register' }">Register</router-link>
                 <a href="#" @click.prevent="$auth.logout()">Logout</a>
+                </div>
                 </td>
             </tr>
         </table>
