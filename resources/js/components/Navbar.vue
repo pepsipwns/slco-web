@@ -67,9 +67,7 @@ export default {
 
 .nav {
     background-color: #333;
-    padding-left:14%;
-    padding-right:14%;
-    padding-bottom: 4px;
+    padding: 2px 14% 4px 14%;
     text-align:center;
     position: relative; /* Set the navbar to fixed position */
     width: 100%; /* Full width */

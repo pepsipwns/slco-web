@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <td width=100%>
-                    <img alt="slco" :src='display' align="right">
+                    <img alt="slco" :src='display' align="center">
             </td>
         </tr>
         </table>
@@ -239,7 +239,6 @@ export default {
     transition: all 1s ease;
   }
   .events-text img{
-      padding-right: 5%;
       width: 90%;
   }
   .events-text{

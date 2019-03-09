@@ -56,6 +56,7 @@ export default {
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
     height: 34px;
+    border-bottom: 2px solid #BF992A;
 }
 .logodiv{
     display:inline-block;

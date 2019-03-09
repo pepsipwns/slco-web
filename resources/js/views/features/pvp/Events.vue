@@ -12,7 +12,7 @@
                     <img alt="slco" :src='ascimg' align="right">    
                 </router-link>
                 </keep-alive>
-                <transition name="fade" mode="out-in">
+                <transition name="fade" mode="out-in" :duration="{ enter: 500, leave: 0}">
                 <div id="ascension-view" class="ascension-view divinactive">
                     <router-view></router-view>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="battlegrounds-txt">Battlegrounds</div>
                     <img alt="slco" :src='bgdimg' align="left">
                 </router-link>
-                <transition name="fade" mode="out-in">
+                <transition name="fade" mode="out-in" :duration="{ enter: 500, leave: 0}">
                 <div id="battlegrounds-view" class="battlegrounds-view divinactive">     
                     <router-view></router-view>
                 </div>
@@ -231,13 +231,16 @@ a:hover{
     padding:0px;
     width:60%;
     height: 100%;
-    transition: opacity 1s;
+    transition: opacity 0.5s;
 }
 .battlegrounds-view.divinactive{
     z-index: 99;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 1s;
+    display:block;
+    float: right;
+    top: 0;
+    transition: none;
 }
 .battlegrounds-view.divactive{
     opacity: 1;
@@ -252,13 +255,16 @@ a:hover{
     padding:0px;
     width:60%;
     height: 100%;
-    transition: opacity 2s;
+    transition: opacity 0.5s;
 }
 .ascension-view.divinactive{
     z-index: 99;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 2s;
+    display:block;
+    float: left;
+    transition: none;
+    top: 0;
 }
 .ascension-view.divactive{
     opacity: 1;
@@ -269,8 +275,11 @@ a:hover{
 .fade-enter,.fade-leave-to {
 	opacity:0;
 }
-.fade-enter-active,.fade-leave-active {
+.fade-enter-active{
 	transition: opacity 1s;
+}
+.fade-leave-active {
+    transition: opacity 0s;
 }
 @media screen and (max-width: 1300px) {
     .battlegrounds-view {
