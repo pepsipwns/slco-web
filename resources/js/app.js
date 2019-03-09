@@ -3,10 +3,10 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 
 //Router info
-import Routes from '@/js/routes.js'
+import Routes from '@/routes.js'
 
 //Components
-import App from '@/js/views/App';
+import App from '@/views/App';
 
 Vue.use(Vuetify);
 
