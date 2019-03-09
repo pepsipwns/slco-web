@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
+import App from './views/App.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Features from './views/Features.vue'
@@ -14,22 +17,42 @@ import Minigames from './views/features/pvp/Minigames.vue'
 import Battlegrounds from './views/features/pvp/events/Battlegrounds.vue'
 import Ascension from './views/features/pvp/events/Ascension.vue'
 import Login from "./views/Login.vue"
-import Secure from "./views/Secure.vue"
+import Register from "./views/Register.vue"
 
 Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+axios.defaults.baseURL = 'http://localhost:8000/api';
 
 const router = new VueRouter({
     mode: 'hash',
     routes: [
         {
           path: '/',
-          name: '#header',
+          name: 'root',
+          hash: '#header',
           component: Home
         },
         {
           path: '/home',
           name: 'home',
+          hash: '#info',
           component: Home
+        },
+        {
+          path: '/register',
+          name: 'register',
+          component: Register,
+          meta: {
+            auth: false
+          }
+        },
+        {
+          path: '/login',
+          name: 'login',
+          component: Login,
+          meta: {
+            auth: false
+          }
         },
         {
           path: '/about',
@@ -58,7 +81,10 @@ const router = new VueRouter({
         {
           path: '/download',
           name: 'download',
-          component: Download
+          component: Download,
+          meta: {
+            auth: true
+          }
         }
       ],
     beforeRouteLeave(to, from, next){
@@ -119,5 +145,13 @@ const router = new VueRouter({
     },
     linkExactActiveClass: 'active'
 });
+Vue.router = router
+
+Vue.use(require('@websanova/vue-auth'), {
+  auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+  http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+  router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+});
+App.router = Vue.router
 
 export default router;
