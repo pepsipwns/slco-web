@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import App from './views/App.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Features from './views/Features.vue'
@@ -16,15 +15,15 @@ import Events from './views/features/pvp/Events.vue'
 import Minigames from './views/features/pvp/Minigames.vue'
 import Battlegrounds from './views/features/pvp/events/Battlegrounds.vue'
 import Ascension from './views/features/pvp/events/Ascension.vue'
-import Login from "./views/Login.vue"
-import Register from "./views/Register.vue"
+import Login from "./components/auth/Login.vue"
+import Register from "./components/auth/Register.vue"
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = 'http://localhost:8000/api';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes: [
         {
           path: '/',
@@ -43,7 +42,7 @@ const router = new VueRouter({
           name: 'register',
           component: Register,
           meta: {
-            auth: false
+            requiresAuth: false
           }
         },
         {
@@ -51,7 +50,7 @@ const router = new VueRouter({
           name: 'login',
           component: Login,
           meta: {
-            auth: false
+            requiresAuth: false
           }
         },
         {
@@ -83,7 +82,7 @@ const router = new VueRouter({
           name: 'download',
           component: Download,
           meta: {
-            auth: true
+            requiresAuth: true
           }
         }
       ],
@@ -152,6 +151,5 @@ Vue.use(require('@websanova/vue-auth'), {
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
 });
-App.router = Vue.router
 
 export default router;

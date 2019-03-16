@@ -7,9 +7,14 @@
                 </td>
                 <td width=30%>
                 <div class="logindiv">
+                <template v-if="!currentUser">
                 <router-link :to="{ name: 'login' }">Login</router-link>
                 <router-link :to="{ name: 'register' }">Register</router-link>
-                <a href="#" @click.prevent="$auth.logout()">Logout</a>
+                </template>
+                <template v-else>
+                <div class="factionfont"> {{ currentUser.name }}</div>
+                <a href="#" @click.prevent="logout">Logout</a>
+                </template>
                 </div>
                 </td>
             </tr>
@@ -18,32 +23,24 @@
 </template>
 
 <script>
-import Login from '../views/Login.vue'
+import Login from '../components/auth/Login.vue'
 
 export default {
   name: 'Header',
+  computed: {
+      currentUser() {
+          return this.$store.getters.currentUser
+      }
+  },
   components: { Login },
   data() {
       return {
           slcologo: 'assets/slcologo.png',
-          authenticated: false,
-          mockAccount: {
-              username: "test",
-              password: "test"
-          }
-      }
-  },
-  mounted() {
-      if(!this.authenticated) {
-          this.$router.replace({ name: "login" });
       }
   },
   methods: {
-      setAuthenticated(status) {
-          this.authenticated = status;
-      },
-      logout() {
-          this.authenticated = false;
+      logout(){
+        this.$store.commit('logout');
       }
   }
 }

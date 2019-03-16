@@ -22,6 +22,11 @@
                 <input type="password" id="password" class="form-control" v-model="password" required>
                 <span class="help-block" v-if="error && errors.password">{{ errors.password }}</span>
             </div>
+            <div class="form-group" v-bind:class="{ 'has-error': error && errors.password }">
+                <label for="password2">Password</label>
+                <input type="password" id="password2" class="form-control" v-model="password2" required>
+                <span class="help-block" v-if="error && errors.password">{{ errors.password }}</span>
+            </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
@@ -34,6 +39,7 @@
                 name: '',
                 email: '',
                 password: '',
+                password2: '',
                 error: false,
                 errors: {},
                 success: false
@@ -41,22 +47,15 @@
         },
         methods: {
             register(){
-                var app = this
-                this.$auth.register({
-                    data: {
-                        name: app.name,
-                        email: app.email,
-                        password: app.password
-                    }, 
-                    success: function () {
-                        app.success = true
-                    },
-                    error: function (resp) {
-                        app.error = true;
-                        app.errors = resp.response.data.errors;
-                    },
-                    redirect: null
-                });                
+                let data = {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                    is_admin: this.is_admin
+                }
+                this.$store.dispatch('register', data)
+                .then(() => this.$router.push('/login'))
+                .catch(err => console.log(err))
             }
         }
     }
