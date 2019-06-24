@@ -2,7 +2,7 @@
     <div class="nav" id="navbar" >
         <div id ="navbarscrollto" height="10">
         </div>
-        <router-link :class="{'router-link-active': $route.fullPath ==='/' || $route.fullPath === '/a'}" :to="{ name: 'home', hash: '#header' }" >Home</router-link>
+        <router-link @click.native="scrollToTop" :class="{'router-link-active': $route.fullPath ==='/' || $route.fullPath === '/a'}" :to="{ name: 'home', hash: '#header' }" >Home</router-link>
         <router-link :class="{'router-link-active': $route.fullPath ==='/' || $route.fullPath === '/a'}" :to="{ name: 'features', hash: '#info' }" exact>Features</router-link>
         <router-link :class="{'router-link-active': $route.fullPath ==='/' || $route.fullPath === '/a'}" :to="{ name: 'download', hash: '#info' }" exact>Download</router-link>
         <a href="">Forum</a>
@@ -24,6 +24,9 @@ export default {
       }
   },
   methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         dropDownMenu: function(){ 
           var x = document.getElementById("navbar");
           if (x.className === "nav") {

@@ -8,8 +8,8 @@
                 <td width=30%>
                 <div class="logindiv">
                 <template v-if="!currentUser">
-                <router-link :to="{ name: 'login' }">Login</router-link>
-                <router-link :to="{ name: 'register' }">Register</router-link>
+                <router-link :to="{ name: 'login', hash:'#info'}">Login</router-link>
+                <router-link :to="{ name: 'register', hash:'#info' }">Register</router-link>
                 </template>
                 <template v-else>
                 <div class="factionfont"> {{ currentUser.name }}</div>

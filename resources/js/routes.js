@@ -23,7 +23,7 @@ Vue.use(VueAxios, axios);
 axios.defaults.baseURL = 'http://localhost:3000';
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     routes: [
         {
           path: '/',
@@ -87,9 +87,15 @@ const router = new VueRouter({
         }
       ],
     beforeRouteLeave(to, from, next){
-        if (from.hash == ''){
-        console.log('beforefound');
-        }
+      console.log('to'+to.hash);
+      console.log('from'+from.hash);
+      console.log('next'+next.hash);
+      if (from.hash == to.hash){
+      console.log('beforefound');
+      }
+      if (from.hash == next.hash){
+      console.log('beforefnextound');
+      }
         next()
     },
     scrollBehavior (to, from, savedPosition) {
